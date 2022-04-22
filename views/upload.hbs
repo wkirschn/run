@@ -6,3 +6,26 @@
     <input type="submit" value="submit" class="btn btn-primary btn-block">
 
 </form>
+
+
+<div class="card card-body mb-3">
+<img src="http://localhost:3000/image/4159170f61a3a2a0cdb90f83ded7797c.jfif">
+    <form method="POST" action="/files/file._id" ?_method="DELETE"></form>
+</div>
+
+<script>
+    if(files) {
+        files.forEach(function(file)  {
+            if(file.isImage) {
+                const img = Document.createElement("img")
+                img.src = "http://localhost:3000/image/" + file.fileName
+            }
+            else {
+                file.filename
+            }
+        });
+    }
+    else {
+        <p>No Files To Show</p>
+    }
+</script>

@@ -84,17 +84,6 @@
         />
     </fieldset>
 
-    <fieldset class="form-group">
-        <label for="profile" class="col-2 control-label">
-            Profile: *
-        </label>
-
-        <input type="file"
-               class="profile"
-               name="filepond"
-               accept="image/png, image/jpeg, image/gif"/>
-
-    </fieldset>
 
 
     <fieldset class="form-group">
@@ -112,3 +101,14 @@
 
 
 
+<fieldset class="form-group">
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <div class="custom-file mb-3">
+            <input type="file" name="file" id="file" class="custom-file-input">
+            <label for="file" class="custom-file-label">Choose File</label>
+        </div>
+        <input type="submit" value="submit" class="btn btn-primary btn-block">
+
+    </form>
+
+</fieldset>
