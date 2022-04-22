@@ -48,9 +48,13 @@ router.post('/add', IsLoggedIn, (req, res, next) => {
     // and map the fields with data from the request
     // callback function will return an error if any or a newProject object
     Recycle.create({
-        name: req.body.name,
-        dueDate: req.body.dueDate,
-        course: req.body.course
+        objectName: req.body.objectName,
+        objectDescription: req.body.objectDescription,
+        objectEcoScore: req.body.objectEcoScore,
+        objectDisposalMethod: req.body.objectDisposalMethod,
+        objectLong: req.body.objectLong,
+        objectLat: req.body.objectLat,
+        profile_id: req.body.profile_id,
     }, (err, recyclingObject) => {
         if (err) {
             console.log(err);

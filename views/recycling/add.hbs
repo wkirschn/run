@@ -7,7 +7,7 @@
 
   OLD ID: name, dueDate, course
 
-  }}
+
   <fieldset>
     <label for="name" class="col-2">
       Object Name *:
@@ -17,20 +17,75 @@
   </fieldset>
   <fieldset>
     <label for="dueDate" class="col-2">
-      Due Date:
+        Object Description *:
     </label>
     <input name="dueDate" id="dueDate" required type="date" />
   </fieldset>
-  <fieldset>
-    <label for="course" class="col-2">
-      Course:
+
+
+
+  }}
+
+    <fieldset>
+        <label for="objectName" class="col-2">
+            Object Name *:
+        </label>
+        <input name="objectName" id="objectName" required type="text"/>
+
+    </fieldset>
+    <fieldset>
+        <label for="objectDescription" class="col-2">
+            Object Description *:
+        </label>
+        <input name="objectDescription" id="objectDescription" required type="text" />
+    </fieldset>
+
+    </fieldset>
+    <fieldset>
+        <label for="objectEcoScore" class="col-2">
+            Object EcoScore *:
+        </label>
+        <input name="objectEcoScore" id="objectEcoScore" required type="text" />
+    </fieldset>
+
+
+    <fieldset>
+    <label for="objectDisposalMethod" class="col-2">
+      Disposal Method:
     </label>
-    <select name="course" id="course">
+    <select name="objectDisposalMethod" id="objectDisposalMethod">
       {{#each courses}}
         <option>{{this.name}}</option>
       {{/each}}
     </select>
   </fieldset>
+
+    <fieldset>
+        <label for="objectLong" class="col-2">
+            Object Longitude *:
+        </label>
+        <input name="objectLong" id="objectLong" required type="number" />
+    </fieldset>
+
+    <fieldset>
+        <label for="objectLat" class="col-2">
+            Object Latitude *:
+        </label>
+        <input name="objectLat" id="objectLat" required type="number" />
+    </fieldset>
+
+    <fieldset>
+        <label for="profile_id" class="col-2">
+            Profile ID:
+        </label>
+        <select name="profile_id" id="profile_id">
+            {{#if user}}
+                <option>{{this.user._id}}</option>
+                <option>{{this.user.username}}</option>
+            {{/if}}
+        </select>
+    </fieldset>
+
   {{! No need to specify Status since it has a default value }}
   {{! Button needs to be inside <form> element to trigger POST }}
   <button class="offset-3 btn btn-primary">
