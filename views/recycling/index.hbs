@@ -1,0 +1,48 @@
+<h1>
+  {{title}}
+</h1>
+{{#if user}}
+{{!-- Add links to CRUD operations --}}
+<a href="/projects/add">Add a new recycling object</a>
+{{/if}}
+
+{{!-- To Show data --}}
+<table class="table table-striped table-hover">
+  <thead>
+    <th>Name</th>
+    <th>Due Date</th>
+    <th>Course</th>
+    <th>Status</th>
+    <th></th>
+  </thead>
+  {{#each dataset}}
+  <tr>
+    <td>{{this.name}}</td>
+    <td>{{toShortDate this.dueDate}}</td>
+    <td>{{this.course}}</td>
+    <td>{{this.status}}</td>
+    {{!-- When inside of a loop, you need to navigate out of it using '../' --}}
+    {{#if ../user}}
+        <td><a href="/projects/edit/{{this._id}}" 
+          class="btn btn-primary">Edit</a>
+            <a href="/projects/delete/{{this._id}}" 
+          class="btn btn-danger"
+            onclick="return confirmDeletion();">Delete</a></td>
+    {{/if}}
+  </tr>
+  {{/each}}
+</table>
+
+
+{{#each dataset}}
+
+<div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="..." alt="Card image cap">
+    <div class="card-body">
+        <h5 class="card-title">{{this.name}}</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+</div>
+
+{{/each}}

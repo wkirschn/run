@@ -38,7 +38,7 @@ router.post('/register', (req, res, next) => {
   // Create a new user based on the information from the page
   User.register(new User({
     username: req.body.username,
-    profile: "http://s3.amazonaws.com/37assets/svn/765-default-avatar.png",
+    profile: req.body.profile,
     firstName: req.body.firstName,
     lastName: req.body.lastName
   }),

@@ -29,6 +29,7 @@ const methodOverride = require('method-override')
 var indexRouter = require('./routes/index');
 var projectsRouter = require('./routes/projects');
 var coursesRouter = require('./routes/courses');
+var reyclingRouter = require('./routes/recycling')
 
 // Import passport modules
 const passport = require('passport');
@@ -129,6 +130,8 @@ passport.deserializeUser(User.deserializeUser());
 app.use('/', indexRouter);
 app.use('/projects', projectsRouter);
 app.use('/courses', coursesRouter);
+app.use('/Recycling', reyclingRouter);
+
 
 
 // MongoDB Connection

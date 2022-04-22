@@ -8,11 +8,7 @@ var userSchemaDefinition = {
     oauthId: String,
     oauthProvider: String,
     created: Date,
-    profile: {
-        type: String,
-        required: true,
-        default: "http://s3.amazonaws.com/37assets/svn/765-default-avatar.png"
-    },
+
     firstName: {
         type: String,
         required: true
