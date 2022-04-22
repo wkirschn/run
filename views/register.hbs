@@ -12,7 +12,7 @@
     </div>
 {{/if}}
 
-<form method="post">
+<form method="post" enctype="multipart/form-data" >
 
 
     <fieldset class="form-group" style="width: auto">
@@ -110,13 +110,5 @@
 
 </form>
 
-<form action="/upload" method="POST" enctype="multipart/form-data">
-    <div class="custom-file mb-3">
-        <input type="file" name="file" id="file" class="custom-file-input">
-        <label for="file" class="custom-file-label">Choose File</label>
-    </div>
-    <input type="submit" value="submit" class="btn btn-primary btn-block">
-
-</form>
 
 
