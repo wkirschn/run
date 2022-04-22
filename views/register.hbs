@@ -1,0 +1,122 @@
+<h1>
+    Register
+</h1>
+
+{{#if messages}}
+    <div class="alert alert-danger">
+        Invalid credentials
+    </div>
+{{else}}
+    <div class="alert alert-info">
+        Please enter your credentials to Register for RePsychle!
+    </div>
+{{/if}}
+
+<form method="post">
+
+
+    <fieldset class="form-group" style="width: auto">
+        <label for="firstName" class="col-2 control-label">
+            First Name: *
+        </label>
+        <input
+                name="firstName"
+                id="firstName"
+                required
+                type="text"
+                placeholder="Enter a First Name"
+        />
+    </fieldset>
+
+    <fieldset class="form-group" style="width: auto">
+        <label for="lastName" class="col-2 control-label">
+            Last Name: *
+        </label>
+        <input
+                name="lastName"
+                id="lastName"
+                required
+                type="text"
+                placeholder="Enter a Last Name"
+        />
+    </fieldset>
+
+
+    <fieldset class="form-group" style="width: auto">
+        <label for="username" class="col-2 control-label">
+            Email Address: *
+        </label>
+        <input
+                name="username"
+                id="username"
+                required
+                type="email"
+                placeholder="Enter a Valid Email Address"
+        />
+    </fieldset>
+
+
+
+    <fieldset class="form-group">
+        <label for="password" class="col-2 control-label">
+            Password: *
+        </label>
+        <input
+                name="password"
+                id="password"
+                type="password"
+                placeholder="Enter a Password"
+                required
+                pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$"
+        />
+    </fieldset>
+    <fieldset class="form-group">
+        <label for="confirm" class="col-2 control-label">
+            Confirm: *
+        </label>
+        <input
+                name="confirm"
+                id="confirm"
+                type="password"
+                placeholder="Enter the Same Password"
+                required
+                pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$"
+        />
+    </fieldset>
+
+    <fieldset class="form-group">
+        <label for="profile" class="col-2 control-label">
+            Profile: *
+        </label>
+
+        <input type="file"
+               class="profile"
+               name="filepond"
+               accept="image/png, image/jpeg, image/gif"/>
+
+    </fieldset>
+
+
+    <fieldset class="form-group">
+        <button class="btn btn-info offset-3">
+            Register
+        </button>
+        <hr />
+        Already have an account?
+        <a href="/login" title="Login">
+            Login
+        </a>
+    </fieldset>
+
+</form>
+
+<form action="/upload" method="POST" enctype="multipart/form-data">
+    <div class="custom-file mb-3">
+        <input type="file" name="file" id="file" class="custom-file-input">
+        <label for="file" class="custom-file-label">Choose File</label>
+    </div>
+    <input type="submit" value="submit" class="btn btn-primary btn-block">
+
+</form>
+
+
