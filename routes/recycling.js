@@ -29,42 +29,42 @@ router.get('/', (req, res, next) => {
     })
 });
 
-router.get('/add', IsLoggedIn, (req, res, next) => {
-    // Get list of courses
-    Course.find((err, courses) => {
-        if (err) {
-            console.log(err);
-        }
-        else {
-            res.render('recycling/add', { title: 'Add a New recycling', courses: courses, user: req.user });
-        }
-    }).sort({ name: -1 });
-});
+// router.get('/add', IsLoggedIn, (req, res, next) => {
+//     // Get list of courses
+//     Course.find((err, courses) => {
+//         if (err) {
+//             console.log(err);
+//         }
+//         else {
+//             res.render('recycling/add', { title: 'Add a New recycling', courses: courses, user: req.user });
+//         }
+//     }).sort({ name: -1 });
+// });
 
 // Add POST handler
-router.post('/add', IsLoggedIn, (req, res, next) => {
-    // use the project module to save data to DB
-    // call create method of the model 
-    // and map the fields with data from the request
-    // callback function will return an error if any or a newProject object
-    Recycle.create({
-        objectName: req.body.objectName,
-        objectDescription: req.body.objectDescription,
-        objectEcoScore: req.body.objectEcoScore,
-        objectDisposalMethod: req.body.objectDisposalMethod,
-        objectLong: req.body.objectLong,
-        objectLat: req.body.objectLat,
-        profile_id: req.body.profile_id,
-    }, (err, recyclingObject) => {
-        if (err) {
-            console.log(err);
-        }
-        else {
-            // We can show a successful message by redirecting them to index
-            res.redirect('/recycling');
-        }
-    });
-});
+// router.post('/add', IsLoggedIn, (req, res, next) => {
+//     // use the project module to save data to DB
+//     // call create method of the model
+//     // and map the fields with data from the request
+//     // callback function will return an error if any or a newProject object
+//     Recycle.create({
+//         objectName: req.body.objectName,
+//         objectDescription: req.body.objectDescription,
+//         objectEcoScore: req.body.objectEcoScore,
+//         objectDisposalMethod: req.body.objectDisposalMethod,
+//         objectLong: req.body.objectLong,
+//         objectLat: req.body.objectLat,
+//         profile_id: req.body.profile_id,
+//     }, (err, recyclingObject) => {
+//         if (err) {
+//             console.log(err);
+//         }
+//         else {
+//             // We can show a successful message by redirecting them to index
+//             res.redirect('/recycling');
+//         }
+//     });
+// });
 
 
 // GET handler for Delete operations

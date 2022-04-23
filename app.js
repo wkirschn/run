@@ -189,6 +189,8 @@ mongoose.connect(connectionString, { useNewUrlParser: true, useUnifiedTopology: 
 // HBS Helper Method to select values from dropdown lists
 const hbs = require('hbs');
 const e = require('express');
+const Course = require("./models/course");
+const Recycle = require("./models/recycling");
 // function name and helper function with parameters
 hbs.registerHelper('createOption', (currentValue, selectedValue) => {
   // initialize selected property
@@ -207,15 +209,59 @@ hbs.registerHelper('toShortDate', (longDateValue) => {
   return new hbs.SafeString(longDateValue.toLocaleDateString('en-CA'));
 });
 
-app.get('/upload', (req, res) => {
+// app.get('/upload', (req, res) => {
+//
+//     gfs.files.find().toArray((err, files) => {
+//
+//         if(!files || files.length === 0) {
+//            res.render('index', {files: false});
+//             }
+//         else {
+//                 // Files exist
+//
+//             files.map(file => {
+//                 if(file.contentType === 'image/jpeg' || file.contentType === 'image/png') {
+//                     file.isImage = true;
+//                 }
+//                 else {
+//                     file.isImage = false;
+//                 }
+//             });
+//             res.render('upload', {files: files});
+//
+//             }
+//
+//
+//
+// })});
+//
+// app.post('/upload', upload.single('file'), (req,res) => {
+//     res.json({file: req.file, fileName: req.file.filename});
+//
+// })
+// add reusable middleware function to inject it in our handlers below that need authorization
+function IsLoggedIn(req,res,next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect('/login');
+}
+
+
+app.get('/recycling/add', IsLoggedIn, (req, res) => {
+
+    Course.find((err, courses) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            res.render('recycling/add', { title: 'Add a New recycling', courses: courses, user: req.user });
+        }
+    }).sort({ name: -1 });
 
     gfs.files.find().toArray((err, files) => {
 
-        if(!files || files.length === 0) {
-           res.render('index', {files: false});
-            }
-        else {
-                // Files exist
+
 
             files.map(file => {
                 if(file.contentType === 'image/jpeg' || file.contentType === 'image/png') {
@@ -225,18 +271,67 @@ app.get('/upload', (req, res) => {
                     file.isImage = false;
                 }
             });
-            res.render('upload', {files: files});
-
-            }
+            res.render('recycling/add', {files: files});
 
 
 
-})});
+    })});
 
-app.post('/upload', upload.single('file'), (req,res) => {
+// Add POST handler
+app.post('/recycling/add', IsLoggedIn,  upload.single('file'), (req, res, next) => {
+    // use the project module to save data to DB
+    // call create method of the model
+    // and map the fields with data from the request
+    // callback function will return an error if any or a newProject object
+
+    app.post('/recycling/add', upload.single('file'), (req, res) =>
+    {
+
+    })
+
+
+    Recycle.create({
+        objectName: req.body.objectName,
+        objectDescription: req.body.objectDescription,
+        objectEcoScore: req.body.objectEcoScore,
+        objectDisposalMethod: req.body.objectDisposalMethod,
+        objectLong: req.body.objectLong,
+        objectLat: req.body.objectLat,
+        profile_id: req.body.profile_id,
+        // file: upload.single('file')
+        file: req.file.filename
+    }, (err, recyclingObject) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            // We can show a successful message by redirecting them to index
+
+            app.post('/recycling/add', upload.single('file'), (req, res) =>
+            {
+               /* res.json({file: req.file, fileName: req.file.filename});*/
+            })
+            res.redirect('/recycling');
+
+
+        }
+    });
+});
+
+
+
+
+
+app.post('/upload', upload.single('file'),  (req,res) => {
     res.json({file: req.file, fileName: req.file.filename});
 
 })
+
+
+
+
+
+
 
 app.get('/files/:filename', (req, res) => {
     gfs.files.findOne({filename: req.params.filename}, (err, file) => {

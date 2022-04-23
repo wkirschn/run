@@ -1,7 +1,7 @@
 <h1>
   {{title}}
 </h1>
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
   {{! Input names have to match the name of the fields in the mongo schema object }}
   {{! Mapping is not automatic, but it's best practices \
 
@@ -64,15 +64,176 @@
         <label for="objectLong" class="col-2">
             Object Longitude *:
         </label>
-        <input name="objectLong" id="objectLong" required type="number" />
+        <input name="objectLong" id="objectLong" required  />
     </fieldset>
 
     <fieldset>
         <label for="objectLat" class="col-2">
             Object Latitude *:
         </label>
-        <input name="objectLat" id="objectLat" required type="number" />
+        <input name="objectLat" id="objectLat" required  />
     </fieldset>
+
+
+
+<!--    <div id="map">-->
+
+<!--&lt;!&ndash;        <h3>My Google Maps Demo</h3>&ndash;&gt;-->
+<!--&lt;!&ndash;        &lt;!&ndash;The div element for the map &ndash;&gt;&ndash;&gt;-->
+
+
+
+
+
+<!--&lt;!&ndash;        &lt;!&ndash; Async script executes immediately and must be after any DOM elements used in callback. &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;        <script>&ndash;&gt;-->
+
+<!--&lt;!&ndash;            // Grab local location&ndash;&gt;-->
+
+
+
+
+<!--&lt;!&ndash;            alert('Please allow RePsychle to determine your coordinates to create an entry into the Database!');&ndash;&gt;-->
+<!--&lt;!&ndash;            console.log(document.querySelector('#objectLong').value)&ndash;&gt;-->
+
+<!--&lt;!&ndash;            document.querySelector('#objectLong').value = 100;&ndash;&gt;-->
+<!--&lt;!&ndash;            console.log(document.querySelector('#objectLong').value)&ndash;&gt;-->
+<!--&lt;!&ndash;            const findLocation = () => {&ndash;&gt;-->
+<!--&lt;!&ndash;                const success = (position) => {&ndash;&gt;-->
+
+<!--&lt;!&ndash;                    document.querySelector('#objectLong').value = position.coords.longitude;&ndash;&gt;-->
+<!--&lt;!&ndash;                    document.querySelector('#objectLat').value = position.coords.latitude;&ndash;&gt;-->
+<!--&lt;!&ndash;                    console.log(document.querySelector('#objectLong').value)&ndash;&gt;-->
+<!--&lt;!&ndash;                    console.log(document.querySelector('#objectLong').value)&ndash;&gt;-->
+
+<!--&lt;!&ndash;                }&ndash;&gt;-->
+<!--&lt;!&ndash;                const error = () => {&ndash;&gt;-->
+<!--&lt;!&ndash;                    console.textContent = 'ERROR!';&ndash;&gt;-->
+<!--&lt;!&ndash;                }&ndash;&gt;-->
+
+<!--&lt;!&ndash;                navigator.geolocation.getCurrentPosition(success, error);&ndash;&gt;-->
+<!--&lt;!&ndash;            }&ndash;&gt;-->
+<!--&lt;!&ndash;            findLocation();&ndash;&gt;-->
+<!--&lt;!&ndash;            console.log(lat);&ndash;&gt;-->
+<!--&lt;!&ndash;            console.log(lng);&ndash;&gt;-->
+
+
+<!--            // console.log(document.querySelector('#objectLong').valueOf().value);-->
+<!--            //-->
+<!--            // // Initialize and add the map-->
+<!--            //-->
+<!--            // var map;-->
+<!--            // var service;-->
+<!--            // var infowindow;-->
+<!--            // console.log(document.querySelector('#objectLong').value)-->
+<!--            //-->
+<!--            //-->
+<!--            // function initMap() {-->
+<!--            //     // The location of Uluru-->
+<!--            //-->
+<!--            //-->
+<!--            //-->
+<!--            //-->
+<!--            // let lat = parseFloat(document.querySelector('#objectLong').value)-->
+<!--            // let lng = parseFloat(document.querySelector('#objectLong').value)-->
+<!--            //-->
+<!--            //-->
+<!--            //-->
+<!--            //-->
+<!--            //-->
+<!--            //-->
+<!--            //     const uluru = { lng, lat };-->
+<!--            //     // The map, centered at Uluru-->
+<!--            //     const map = new google.maps.Map(document.getElementById("map"), {-->
+<!--            //         zoom: 10,-->
+<!--            //         center: uluru,-->
+<!--            //     });-->
+<!--            //-->
+<!--            //     var request = {-->
+<!--            //         location: uluru,-->
+<!--            //         radius: '500',-->
+<!--            //         query: 'recycle'-->
+<!--            //     };-->
+<!--            //-->
+<!--            //-->
+<!--            //-->
+<!--            //     const image =-->
+<!--            //             "https://i.imgur.com/0hu7SXd.png";-->
+<!--            //     // The marker, positioned at Uluru-->
+<!--            //     const marker = new google.maps.Marker({-->
+<!--            //         position: uluru,-->
+<!--            //         map: map,-->
+<!--            //         title: "Recycle Object",-->
+<!--            //         icon: image,-->
+<!--            //     });-->
+<!--            //-->
+<!--            //-->
+<!--            //-->
+<!--            //-->
+<!--            //     google.maps.event.addListener(marker, "click", function (event) {-->
+<!--            //         var latitude = event.latLng.lat();-->
+<!--            //         var longitude = event.latLng.lng();-->
+<!--            //         console.log(latitude + ', ' + longitude);-->
+<!--            //     });-->
+<!--            //     marker.setMap(map);-->
+<!--            //-->
+<!--            //-->
+
+<!--&lt;!&ndash;        <style>&ndash;&gt;-->
+<!--&lt;!&ndash;            #map {&ndash;&gt;-->
+<!--&lt;!&ndash;                height:200px;&ndash;&gt;-->
+<!--&lt;!&ndash;                width: 50%;&ndash;&gt;-->
+<!--&lt;!&ndash;            }&ndash;&gt;-->
+<!--&lt;!&ndash;        </style>&ndash;&gt;-->
+
+<!--        }-->
+
+
+
+<!--        </script>-->
+
+
+<!--        <script defer-->
+<!--                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2n5bffW-wp4CH407vxkWEXa1a4DiWUr0&callback=initMap&v=weekly"-->
+<!--                async-->
+<!--        ></script>-->
+
+<!--    </div>-->
+
+
+
+
+
+
+    <script>
+
+        // Grab local location
+
+        alert('Please allow RePsychle to determine your coordinates to create an entry into the Database!');
+        console.log(document.querySelector('#objectLong').value)
+
+        document.querySelector('#objectLong').value = 100;
+        console.log(document.querySelector('#objectLong').value)
+        const findLocation = () => {
+            const success = (position) => {
+
+                document.querySelector('#objectLong').value = position.coords.longitude;
+                document.querySelector('#objectLat').value = position.coords.latitude;
+                console.log(document.querySelector('#objectLong').value)
+                console.log(document.querySelector('#objectLong').value)
+
+            }
+            const error = () => {
+                console.textContent = 'ERROR!';
+            }
+
+            navigator.geolocation.getCurrentPosition(success, error);
+        }
+        findLocation();
+        console.log(lat);
+        console.log(lng);
+    </script>
+
 
     <fieldset>
         <label for="profile_id" class="col-2">
@@ -86,9 +247,19 @@
         </select>
     </fieldset>
 
+        <div class="custom-file mb-3">
+            <input type="file" name="file" id="file" class="custom-file-input">
+            <label for="file" class="custom-file-label">Choose File</label>
+        </div>
+        <input type="submit" value="submit" class="btn btn-primary btn-block">
+
+
+
+    <hr>
   {{! No need to specify Status since it has a default value }}
   {{! Button needs to be inside <form> element to trigger POST }}
   <button class="offset-3 btn btn-primary">
     Save
   </button>
 </form>
+
