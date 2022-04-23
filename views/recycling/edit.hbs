@@ -1,53 +1,9 @@
-<h1>
-  {{title}}
-</h1>
-<form method="POST">
-  {{! Input names have to match the name of the fields in the mongo schema object }}
-  {{! Mapping is not automatic, but it's best practices }}
-  <fieldset>
-    <label for="name" class="col-2" >
-      Name:
-    </label>
-    <input name="name" id="name" required value="{{this.objectName}}"/>
-  </fieldset>
 
-  <fieldset>
-    <label for="course" class="col-2">
-      Course:
-    </label>
-    <select name="course" id="course">
-      {{#each courses}}
-        <!--<option>{{this.name}}</option>-->
-        {{!-- Modify this block of code with a helper method (app.js) to add a selected option --}}
-        {{createOption this.name ../project.course }}
-      {{/each}}
-    </select>
-  </fieldset>
-  {{!-- Add fieldsets for Status --}}
-  <fieldset>
-    <label for="status" class="col-2">
-      Status:
-    </label>
-    <select name="status" id="status">
-      {{!-- Hardcode values as these won't change --}}
-      {{!-- <option>TO DO</option>
-      <option>IN PROGRESS</option>
-      <option>DONE</option> --}}
-      {{!-- Use helper instead --}}
-      {{createOption 'TO DO' ../project.status}}
-      {{createOption 'IN PROGRESS' ../project.status}}
-      {{createOption 'DONE' ../project.status}}
-    </select>
-  </fieldset>
-  {{! Button needs to be inside <form> element to trigger POST }}
-  <button class="offset-3 btn btn-primary">
-    Save
-  </button>
-</form>
 
 <h1>
-    {{title}}
+    {{title}} {{#if user}} {{this.user.username}} {{/if}}
 </h1>
+
 <form method="POST" enctype="multipart/form-data">
     {{! Input names have to match the name of the fields in the mongo schema object }}
     {{! Mapping is not automatic, but it's best practices \
@@ -77,22 +33,21 @@
         <label for="objectName" class="col-2">
             Object Name *:
         </label>
-        <input name="objectName" id="objectName" required type="text"/>
-
+        <input name="objectName" id="objectName" required type="text" value="{{recycling.objectName}}"/>
+{{this.objectName}}
     </fieldset>
     <fieldset>
         <label for="objectDescription" class="col-2">
             Object Description *:
         </label>
-        <input name="objectDescription" id="objectDescription" required type="text" />
+        <textarea rows="3" cols="40" name="objectDescription" id="objectDescription" required type="text">{{recycling.objectDescription}}</textarea>
     </fieldset>
 
-    </fieldset>
     <fieldset>
         <label for="objectEcoScore" class="col-2">
             Object EcoScore *:
         </label>
-        <input name="objectEcoScore" id="objectEcoScore" required type="text" />
+        <input name="objectEcoScore" id="objectEcoScore" required type="text" value="{{recycling.objectEcoScore}}">
     </fieldset>
 
 
@@ -111,14 +66,14 @@
         <label for="objectLong" class="col-2">
             Object Longitude *:
         </label>
-        <input name="objectLong" id="objectLong" required type="number" />
+        <input name="objectLong" id="objectLong" required type="number" value="{{recycling.objectLong}}"/>
     </fieldset>
 
     <fieldset>
         <label for="objectLat" class="col-2">
             Object Latitude *:
         </label>
-        <input name="objectLat" id="objectLat" required type="number" />
+        <input name="objectLat" id="objectLat" required type="number" value="{{recycling.objectLat}}"/>
     </fieldset>
 
     <fieldset>
@@ -127,7 +82,7 @@
         </label>
         <select name="profile_id" id="profile_id">
             {{#if user}}
-                <option>{{this.user._id}}</option>
+
                 <option>{{this.user.username}}</option>
             {{/if}}
         </select>
@@ -138,8 +93,6 @@
         <label for="file" class="custom-file-label">Choose File</label>
     </div>
     <input type="submit" value="submit" class="btn btn-primary btn-block">
-
-
 
     <hr>
     {{! No need to specify Status since it has a default value }}

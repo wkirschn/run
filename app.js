@@ -191,6 +191,7 @@ const hbs = require('hbs');
 const e = require('express');
 const Course = require("./models/course");
 const Recycle = require("./models/recycling");
+const Project = require("./models/projects");
 // function name and helper function with parameters
 hbs.registerHelper('createOption', (currentValue, selectedValue) => {
   // initialize selected property
@@ -248,6 +249,8 @@ function IsLoggedIn(req,res,next) {
 }
 
 
+
+
 app.get('/recycling/add', IsLoggedIn, (req, res) => {
 
     Course.find((err, courses) => {
@@ -255,7 +258,7 @@ app.get('/recycling/add', IsLoggedIn, (req, res) => {
             console.log(err);
         }
         else {
-            res.render('recycling/add', { title: 'Add a New recycling', courses: courses, user: req.user });
+            res.render('recycling/add', { title: 'Add a New Object to the RePsychle Database!', courses: courses, user: req.user });
         }
     }).sort({ name: -1 });
 
@@ -276,6 +279,82 @@ app.get('/recycling/add', IsLoggedIn, (req, res) => {
 
 
     })});
+
+
+// GET handler for Edit operations
+app.get('/recycling/edit/:_id', IsLoggedIn, (req, res, next) => {
+    // Find the Project by ID
+    // Find available courses
+    // Pass them to the view
+    Recycle.findById(req.params._id, (err, recycling) => {
+        console.log(req.params._id);
+        if (err) {
+            console.log(err);
+        }
+        else {
+
+            Course.find((err, courses) => {
+                if (err) {
+                    console.log(err);
+                }
+                else {
+                    res.render('recycling/edit', {
+                        title: 'Edit:',
+                        recycling: recycling,
+                        courses: courses,
+                        user: req.user,
+
+                    });
+                }
+            }).sort({ name: 1 });
+        }
+    });
+});
+
+app.get('/recycling/delete/:_id', IsLoggedIn, (req, res, next) => {
+    // call remove method and pass id as a json object
+    Recycle.remove({ _id: req.params._id }, (err) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            res.redirect('/recycling')
+        }
+    })
+});
+
+// POST handler for Edit operations
+app.post('/recycling/edit/:_id', IsLoggedIn, (req,res,next) => {
+    // find project based on ID
+    // try updating with form values
+    // redirect to /Projects
+
+
+    Recycle.findOneAndUpdate({_id: req.params._id}, {
+        objectName: req.body.objectName,
+        objectDescription: req.body.objectDescription,
+        objectEcoScore: req.body.objectEcoScore,
+        objectDisposalMethod: req.body.objectDisposalMethod,
+        objectLong: req.body.objectLong,
+        objectLat: req.body.objectLat,
+        profile_id: req.body.profile_id,
+        file: req.body.file
+    }, (err, updatedRecycling) => {
+        if (err) {
+            console.log(err)
+        }
+        else {
+
+
+            res.redirect('/recycling');
+        }
+    });
+});
+
+
+
+
+
 
 // Add POST handler
 app.post('/recycling/add', IsLoggedIn,  upload.single('file'), (req, res, next) => {
@@ -328,7 +407,10 @@ app.post('/upload', upload.single('file'),  (req,res) => {
 })
 
 
+app.get('/upload', upload.single('file'),  (req,res) => {
+    res.render('upload');
 
+})
 
 
 

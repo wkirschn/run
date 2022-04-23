@@ -3,7 +3,7 @@
 </h1>
 {{#if user}}
 {{!-- Add links to CRUD operations --}}
-<a href="/projects/add">Add a new recycling object</a>
+<a href="/recycling/add">Add a new recycling object</a>
 {{/if}}
 
 {{!-- To Show data --}}
@@ -36,6 +36,7 @@
 
 {{#each dataset}}
 
+
 <div class="card" style="width: 18rem;">
     <img class="card-img-top" src="http://localhost:3000/image/{{this.file}}" alt="Card image cap">
     <div class="card-body">
@@ -50,9 +51,12 @@
                    class="btn btn-primary">Edit</a>
                 <a href="/recycling/delete/{{this._id}}"
                    class="btn btn-danger"
-                   onclick="return confirmDeletion();">Delete</a></td>
+                   >Delete</a></td>
         {{/if}}
+
+
     </div>
 </div>
+
 
 {{/each}}

@@ -69,64 +69,64 @@ router.get('/', (req, res, next) => {
 
 // GET handler for Delete operations
 // :_id is a placeholder for naming whatever is after the / in the path
-router.get('/delete/:_id', IsLoggedIn, (req, res, next) => {
-    // call remove method and pass id as a json object
-    Project.remove({ _id: req.params._id }, (err) => {
-        if (err) {
-            console.log(err);
-        }
-        else {
-            res.redirect('/recycling')
-        }
-    })
-});
+// router.get('/delete/:_id', IsLoggedIn, (req, res, next) => {
+//     // call remove method and pass id as a json object
+//     Project.remove({ _id: req.params._id }, (err) => {
+//         if (err) {
+//             console.log(err);
+//         }
+//         else {
+//             res.redirect('/recycling')
+//         }
+//     })
+// });
 
-// GET handler for Edit operations
-router.get('/edit/:_id', IsLoggedIn, (req, res, next) => {
-    // Find the Project by ID
-    // Find available courses
-    // Pass them to the view
-    Project.findById(req.params._id, (err, project) => {
-        if (err) {
-            console.log(err);
-        }
-        else {
-            Course.find((err, courses) => {
-                if (err) {
-                    console.log(err);
-                }
-                else {
-                    res.render('recycling/edit', {
-                        title: 'Edit a recycling',
-                        project: project,
-                        courses: courses, 
-                        user: req.user
-                    });
-                }
-            }).sort({ name: 1 });
-        }
-    });
-});
-
-// POST handler for Edit operations
-router.post('/edit/:_id', IsLoggedIn, (req,res,next) => {
-    // find project based on ID
-    // try updating with form values
-    // redirect to /Projects
-    Project.findOneAndUpdate({_id: req.params._id}, {
-        name: req.body.name,
-        dueDate: req.body.dueDate,
-        course: req.body.course,
-        status: req.body.status
-    }, (err, updatedRecycling) => {
-        if (err) {
-            console.log(err)
-        }
-        else {
-            res.redirect('/recycling');
-        }
-    });
-});
+// // GET handler for Edit operations
+// router.get('/edit/:_id', IsLoggedIn, (req, res, next) => {
+//     // Find the Project by ID
+//     // Find available courses
+//     // Pass them to the view
+//     Project.findById(req.params._id, (err, project) => {
+//         if (err) {
+//             console.log(err);
+//         }
+//         else {
+//             Course.find((err, courses) => {
+//                 if (err) {
+//                     console.log(err);
+//                 }
+//                 else {
+//                     res.render('recycling/edit', {
+//                         title: 'Edit a recycling',
+//                         project: project,
+//                         courses: courses,
+//                         user: req.user
+//                     });
+//                 }
+//             }).sort({ name: 1 });
+//         }
+//     });
+// });
+//
+// // POST handler for Edit operations
+// router.post('/edit/:_id', IsLoggedIn, (req,res,next) => {
+//     // find project based on ID
+//     // try updating with form values
+//     // redirect to /Projects
+//     Project.findOneAndUpdate({_id: req.params._id}, {
+//         name: req.body.name,
+//         dueDate: req.body.dueDate,
+//         course: req.body.course,
+//         status: req.body.status
+//     }, (err, updatedRecycling) => {
+//         if (err) {
+//             console.log(err)
+//         }
+//         else {
+//             res.redirect('/recycling');
+//         }
+//     });
+// });
 
 // Export this router module
 module.exports = router;
